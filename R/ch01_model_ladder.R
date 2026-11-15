@@ -5,8 +5,12 @@
 source("data_students24.R")
 
 rmse <- function(y, yhat) sqrt(mean((y - yhat)^2))
-# 小数 d 桁に四捨五入して表示（67.475 → 67.48。本文の書き方に合わせる）
-f <- function(x, d = 2) formatC(round(x + sign(x) * 1e-9, d), format = "f", digits = d)
+# 表示用の関数：小数 d 桁に四捨五入して文字にします。
+# コンピュータの中では 67.475 が「67.475 よりほんの少し小さい数」として持たれていて，
+# そのまま丸めると 67.47 になります。本文（67.48）と同じ表示にするため，ごく小さい数を足してから丸めます。
+f <- function(x, d = 2) {
+  formatC(round(x + sign(x) * 1e-9, d), format = "f", digits = d)
+}
 
 cat("=== 24人のデータ ===\n")
 cat("成績    :", grade, "\n")
@@ -28,6 +32,8 @@ mo <- h$mids[which.max(h$counts)]
 cat("=== ヒストグラム（5点刻み）===\n")
 for (i in seq_along(h$counts)) cat(sprintf("  %2.0f-%2.0f : %d\n", br[i], br[i + 1], h$counts[i]))
 cat("最頻値（いちばん多い区間の中心）=", mo, "\n\n")
+
+cat("最頻値だけのモデルの残差の平均 =", f(mean(grade - mo)), "\n\n")   # 本文の +9.98
 
 m3 <- lm(grade ~ studyTime - 1)           # 勉強時間だけ（切片なし）
 m4 <- lm(grade ~ studyTime)               # 切片＋勉強時間

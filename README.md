@@ -33,8 +33,9 @@ source("ch01_model_ladder.R")
 | `ch06_bayes.R` | 第6章 ベイズ統計の数理 | 信用区間，周辺尤度とベイズファクター，BIC（コイン投げ） |
 | `ch09_reading_output.R` | 第9章 あなたの出力を読む | `summary()` の読み方，信頼区間と予測区間，診断プロット，ベイズファクター |
 | `appendix_r_basics.R` | 付録 R コードの文法 | 付録の例のうち，データ（NHANES）が無くても走るもの |
+| `appendix_nhanes.R` | 付録 R コードの文法 | 付録の例のうち，米国の健康調査のデータ NHANES を使うもの |
 
-`ch09_reading_output.R` の最後の部分だけ，パッケージ BayesFactor を使います（`install.packages("BayesFactor")`）。入っていなければ，その部分は飛ばします。
+`ch09_reading_output.R` の最後の部分だけ，パッケージ BayesFactor を使います（`install.packages("BayesFactor")`）。入っていなければ，その部分は飛ばします。`appendix_nhanes.R` はパッケージ NHANES を使います（`install.packages("NHANES")`。NHANES 2.1.0 で確かめました）。
 
 ## 図を描くコード（`figures/`）
 

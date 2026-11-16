@@ -75,22 +75,6 @@ for (i in 1:10000) {                # i を 1〜10000 まで動かす
 print(length(boot_means_a))         # 10000個の平均が入る
 print(identical(boot_means_a, boot_means))   # TRUE（同じ種なら同じ結果）
 
-cat("\n=== t.test()：血圧を「運動するか」で2群比較 ===\n")
-result <- t.test(BPSysAve ~ PhysActive, data = nhanes_adult)
-print(result)                       # デフォルトは Welch の t検定
-
-cat("\n=== cor() と cor.test() ===\n")
-# x と y は，ここでは成人の身長と体重（両方そろっている人だけ）
-ok <- !is.na(nhanes_adult$Height) & !is.na(nhanes_adult$Weight)
-x <- nhanes_adult$Height[ok]
-y <- nhanes_adult$Weight[ok]
-print(cor(x, y))                    # 相関係数だけを返す（-1〜1 の数）
-print(cor.test(x, y))               # 相関係数＋t・p値・信頼区間（検定つき）
-
-cat("\n=== $ で結果の一部を取り出す ===\n")
-print(result$p.value)               # 上で保存した結果から，p値だけ取り出す
-print(t.test(BPSysAve ~ PhysActive, data = nhanes_adult)$p.value)  # 保存せずに直接
-
 cat("\n=== == で絞り込む，欠損は na.rm ===\n")
 print(table(NHANES$Gender == "female"))
 print(mean(nhanes_adult$Height))                # NA（欠損があると計算できない）
